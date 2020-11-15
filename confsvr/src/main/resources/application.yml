@@ -1,0 +1,26 @@
+server:
+  port: 8888
+
+
+#spring:
+#  profiles:
+#    active: native
+#  cloud:
+#    config:
+#      server:
+#        native:
+##          search-locations: file:///usr/local/configserver/src/main/resources/config/licensingservice,
+##            file:///usr/local/configserver/BOOT-INF/classes/config/licensingservice
+#          searchLocations: classpath:config/,classpath:config/licensingservice
+spring:
+  profiles:
+    active: native
+  cloud:
+    config:
+      server:
+        encrypt:
+          enabled: false
+        git:
+          uri: https://github.com/oselesley/eagle-eye-config-repo/
+          search-paths: licensingservice,organizationservice
+
