@@ -14,13 +14,11 @@ server:
 #          searchLocations: classpath:config/,classpath:config/licensingservice
 spring:
   profiles:
-    active: native
+    active: dev
   cloud:
     config:
       server:
-        encrypt:
-          enabled: false
         git:
-          uri: https://github.com/oselesley/eagle-eye-config-repo/
+          uri: https://github.com/oselesley/config-repo
           search-paths: licensingservice,organizationservice
 

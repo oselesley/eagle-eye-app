@@ -6,7 +6,7 @@ spring:
     database: POSTGRESQL
     show-sql: true
   datasource:
-    url: jdbc:postgresql://${DB:localhost}:5432/eagle_eye_prod
+    url: jdbc:postgresql://database:5432/eagle_eye_prod
     platform: postgres
     username: postgres_prod
       password: postgr@s_prod

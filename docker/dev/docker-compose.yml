@@ -4,15 +4,13 @@ services:
     image: oselesley/tmx_confsvr:0.0.1-SNAPSHOT
     ports:
       - "8888:8888"
-    volumes:
-    - ./src:/usr/local/configserver/data
     environment:
       ENCRYPT_KEY: "IMSYMMETRIC"
 
   database:
     image: postgres:latest
     ports:
-      - 5432:5432
+      - "5432:5432"
     environment:
       POSTGRES_USER: "postgres_dev"
       POSTGRES_PASSWORD: "postgr@s_dev"
@@ -22,11 +20,11 @@ services:
     image: oselesley/tmx_licensing-service:0.0.1-SNAPSHOT
     ports:
       - "8080:8080"
-    volumes:
-    - ./src:/usr/local/licensingservice/data
     environment:
       PROFILE: dev
       CONFIGSERVER_URI: "http://configserver:8888"
       CONFIGSERVER_PORT: 8888
       DATABASESERVER_PORT: 5432
       ENCRYPT_KEY: "IMSYMMETRIC"
+    depends_on:
+      - database

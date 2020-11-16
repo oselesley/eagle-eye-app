@@ -1,8 +1,0 @@
-spring:
-  application:
-    name: licensingservice
-  profiles:
-    active: dev
-  cloud:
-    config:
-      uri: http://${CONFIG:localhost}:8888

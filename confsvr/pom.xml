@@ -41,11 +41,6 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <version>42.2.18.jre7</version>
-        </dependency>
 
 
     </dependencies>
@@ -106,7 +101,6 @@
                 <artifactId>dockerfile-maven-plugin</artifactId>
                 <version>1.4.3</version>
                 <configuration>
-                    <serverId>registry.hub.docker.com</serverId>
                     <useMavenSettingsForAuth>true</useMavenSettingsForAuth>
                     <repository>oselesley/${docker.image.prefix}_${project.artifactId}</repository>
                     <tag>${project.version}</tag>

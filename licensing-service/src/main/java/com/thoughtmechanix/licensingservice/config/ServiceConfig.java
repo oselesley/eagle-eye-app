@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ServiceConfig {
-    @Value("${example.property}")
+    @Value("${tracer.property:example property}")
     private String property;
 
     public String getProperty() {

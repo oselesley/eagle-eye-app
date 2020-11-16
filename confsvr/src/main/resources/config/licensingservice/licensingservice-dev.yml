@@ -1,5 +1,5 @@
 tracer:
-  property: I AM DEV
+  property: "I AM DEV"
 
 management:
   endpoints:
@@ -9,19 +9,19 @@ management:
 
 spring:
   profiles:
-    active: dev
+    active: "dev"
   jpa:
-    database: POSTGRESQL
-    show-sql: true
+    database: "POSTGRESQL"
+    show-sql: "true"
   datasource:
-    url: jdbc:postgresql://${DB:localhost}:5432/eagle_eye_dev
-    platform: postgres
-    username: ${postgres_dev}
-    password: ${postgr@s_dev}
-    driverClassName: org.postgresql.Driver
+    url: "jdbc:postgresql://database:5432/eagle_eye_dev"
+    platform: "postgres"
+    username: "postgres_dev"
+    password: "postgr@s_dev"
+    driverClassName: "org.postgresql.Driver"
     tomcat:
-      test-while-idle: true
-      validation-query: SELECT 1
+      test-while-idle: "true"
+      validation-query: "SELECT 1"
 redis:
-  server: redis
-  port: 6379
+  server: "redis"
+  port: "6379"

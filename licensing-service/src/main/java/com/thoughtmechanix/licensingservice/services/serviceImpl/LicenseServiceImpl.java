@@ -4,6 +4,8 @@ import com.thoughtmechanix.licensingservice.config.ServiceConfig;
 import com.thoughtmechanix.licensingservice.models.License;
 import com.thoughtmechanix.licensingservice.repositories.LicenseRepository;
 import com.thoughtmechanix.licensingservice.services.LicenseService;
+import org.hibernate.annotations.common.util.impl.LoggerFactory;
+import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,11 +14,15 @@ import java.util.UUID;
 
 @Service
 public class LicenseServiceImpl implements LicenseService {
-    @Autowired
     private LicenseRepository licenseRepository;
+    private ServiceConfig config;
+    private Logger log = LoggerFactory.logger(LicenseServiceImpl.class);
 
-    @Autowired
-    ServiceConfig config;
+    public LicenseServiceImpl(LicenseRepository licenseRepository,
+                              ServiceConfig config) {
+        this.licenseRepository = licenseRepository;
+        this.config = config;
+    }
 
     @Override
     public License getLicense(String organizationId, String licenseId) {
