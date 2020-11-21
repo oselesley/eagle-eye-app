@@ -1,0 +1,9 @@
+server:
+  port: 8761
+eureka:
+  client:
+    register-with-eureka: false # this is a eureka server, no need to register with eureka
+    fetch-registry: false # don't cache locally for same reason as above
+
+  server:
+    wait-time-in-ms-when-sync-empty: 5 # give all services 5mins to register with eureka when application starts

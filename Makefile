@@ -10,6 +10,7 @@ test:
 compose:
 	docker system prune -a --volumes
 	cd confsvr && mvn clean install && cd ../  && cd licensing-service && mvn clean install && cd ../
+	cd eurekasvr && mvn clean install && cd ../
 	docker-compose -f docker/dev/docker-compose.yml up
 
 
