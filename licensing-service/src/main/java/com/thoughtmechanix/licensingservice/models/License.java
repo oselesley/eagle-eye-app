@@ -4,10 +4,7 @@ package com.thoughtmechanix.licensingservice.models;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Getter
 @Setter
@@ -17,6 +14,18 @@ public class License {
     @Id
     @Column(name = "license_id", nullable = false)
     private String id;
+
+    @Transient
+    private String organizationName = "";
+
+    @Transient
+    private String contactName = "";
+
+    @Transient
+    private String contactEmail = "";
+
+    @Transient
+    private String contactPhone = "";
 
     @Column(name = "organization_id", nullable = false)
     private String organizationId;
@@ -68,6 +77,26 @@ public class License {
 
     public License withComment (String comment) {
         this.comment = comment;
+        return this;
+    }
+
+    public License withContactName (String contactName) {
+        this.contactName = contactName;
+        return this;
+    }
+
+    public License withContactEmail (String contactEmail) {
+        this.contactEmail = contactEmail;
+        return this;
+    }
+
+    public License withContactPhone (String contactPhone) {
+        this.contactPhone = contactPhone;
+        return this;
+    }
+
+    public License withOrganizationName (String organizationName) {
+        this.organizationName = organizationName;
         return this;
     }
 }

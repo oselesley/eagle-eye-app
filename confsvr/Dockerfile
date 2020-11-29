@@ -1,5 +1,5 @@
 FROM openjdk:13-jdk-alpine3.10
-RUN  apk update && apk upgrade && apk add netcat-openbsd && apk add curl
+RUN  apk update && apk upgrade && apk add netcat-openbsd && apk add curl && apk add bind-tools
 RUN mkdir -p /usr/local/configserver
 RUN echo $JAVA_HOME
 ADD  target/confsvr-0.0.1-SNAPSHOT.jar /usr/local/configserver/

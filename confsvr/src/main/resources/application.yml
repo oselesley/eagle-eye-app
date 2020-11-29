@@ -21,4 +21,8 @@ spring:
         git:
           uri: https://github.com/oselesley/config-repo
           search-paths: licensingservice,organizationservice
+        encrypt:
+          enabled: false
+      discovery:
+        enabled: true
 

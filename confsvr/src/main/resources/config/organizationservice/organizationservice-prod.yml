@@ -1,0 +1,19 @@
+tracer:
+  property: I AM DEV
+
+spring:
+  jpa:
+    database: POSTGRESQL
+    show-sql: true
+  datasource:
+    url: jdbc:postgresql://database:5432/eagle_eye_prod
+    platform: postgres
+    username: postgres_prod
+      password: postgr@s_prod
+    driverClassName: org.postgresql.Driver
+    tomcat:
+      test-while-idle: true
+      validation-query: SELECT 1
+redis:
+  server: redis
+  port: 6379
