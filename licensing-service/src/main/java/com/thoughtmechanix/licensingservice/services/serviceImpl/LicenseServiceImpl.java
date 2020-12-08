@@ -46,6 +46,8 @@ public class LicenseServiceImpl implements LicenseService {
 
 
     private Organization retrieveOrgInfo (String organizationId, String clientType) {
+        log.infof("LicenseServiceImpl.retrieveOrgInfo: retrieving organization info....");
+
         switch (clientType.toLowerCase()) {
             case "discovery":
                 return organizationDiscoveryClient.getOrganization(organizationId);
@@ -60,8 +62,11 @@ public class LicenseServiceImpl implements LicenseService {
     @Override
     public License getLicense(String organizationId, String licenseId, String clientType) {
         Organization organization = retrieveOrgInfo(organizationId, clientType);
+        log.infof("LicenseServiceImpl.getLicense: retrieving organization info... %s", organization);
 
         License license = licenseRepository.findByOrganizationIdAndId(organizationId, licenseId);
+        if (organization == null) return new License()
+            .withOrganizationName("No license with Organization id " + organizationId + " found!");
 
         return license
                 .withOrganizationName(organization.getName())

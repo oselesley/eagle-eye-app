@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: gatewayserver
+  profiles:
+    active: dev
+  cloud:
+    config:
+      enabled: true
+      discovery:
+        enabled: true
+        service-id: configserver
+#    gateway:
+#      discovery:
+#        locator: #A
+#          enabled: true

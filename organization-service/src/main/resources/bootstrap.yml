@@ -6,7 +6,10 @@ spring:
   cloud:
     config:
       enabled: true
-      uri: http://localhost:8888
+      discovery:
+        enabled: true
+        service-id: configserver
+
 management:
   security:
     enabled: false

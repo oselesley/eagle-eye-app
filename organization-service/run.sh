@@ -14,13 +14,12 @@ echo ">>>>>>>>>>>> Configuration Server has started"
 echo "********************************************************"
 echo "Waiting for the database server to start on port $DATABASESERVER_PORT"
 echo "********************************************************"
-while ! `nc -z database $DATABASESERVER_PORT`; do sleep 3; done
+while ! `nc -z organizationdb $DATABASESERVER_PORT`; do sleep 3; done
 echo ">>>>>>>>>>>> Database Server has started"
 
 echo "********************************************************"
-echo "Starting Organization Service with Configuration Service :  $CONFIGSERVER_URI";
+echo "Starting License Server with Configuration Service via Eureka :  $EUREKASERVER_URI" ON PORT: $SERVER_PORT;
 echo "********************************************************"
 java  -Dspring.cloud.config.uri=$CONFIGSERVER_URI \
-      -Dserver.port=$SERVER_PORT \
       -Deureka.client.serviceUrl.defaultZone=$EUREKASERVER_URI \
       -Dspring.profiles.active=$PROFILE -jar /usr/local/organizationservice/organization-service-0.0.1-SNAPSHOT.jar

@@ -7,3 +7,8 @@ eureka:
 
   server:
     wait-time-in-ms-when-sync-empty: 5 # give all services 5mins to register with eureka when application starts
+
+logging:
+  level:
+    com.netflix.eureka: OFF
+    com.netflix.discovery: OFF

@@ -1,6 +1,3 @@
-spring:
-  application:
-    name: organizationservice
 eureka:
   instance:
     preferIpAddress: true

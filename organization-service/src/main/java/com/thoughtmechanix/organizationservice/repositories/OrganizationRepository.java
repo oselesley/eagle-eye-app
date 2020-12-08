@@ -5,8 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface OrganizationRepository extends JpaRepository<Organization, Long> {
-    Organization findOrganizationById (String id);
-
+public interface OrganizationRepository extends JpaRepository<Organization, String> {
     Organization findOrganizationByName (String name);
 }

@@ -4,9 +4,13 @@ package com.thoughtmechanix.organizationservice.services.serviceImpl;
 import com.thoughtmechanix.organizationservice.models.Organization;
 import com.thoughtmechanix.organizationservice.repositories.OrganizationRepository;
 import com.thoughtmechanix.organizationservice.services.OrganizationService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
+@Slf4j
 @Service
 public class OrganizationServiceImpl implements OrganizationService {
     @Autowired
@@ -23,8 +27,15 @@ public class OrganizationServiceImpl implements OrganizationService {
     }
 
     @Override
+    public List<Organization> getOrganizations() {
+        List<Organization> organizations = organizationRepository.findAll();
+        log.info(organizations + "retriving organizations...");
+        return organizations;
+    }
+
+    @Override
     public Organization getOrganizationById(String organizationId) {
-        return organizationRepository.findOrganizationById(organizationId);
+        return organizationRepository.findById(organizationId).orElseGet(() -> null);
     }
 
     @Override

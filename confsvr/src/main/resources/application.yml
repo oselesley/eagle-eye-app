@@ -20,7 +20,8 @@ spring:
       server:
         git:
           uri: https://github.com/oselesley/config-repo
-          search-paths: licensingservice,organizationservice
+          search-paths: licensingservice,organizationservice,gatewayserver
+          skip-ssl-validation: true
         encrypt:
           enabled: false
       discovery:

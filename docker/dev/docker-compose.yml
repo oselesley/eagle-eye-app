@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 services:
   eurekaserver:
     image:   oselesley/tmx_eurekasvr:0.0.1-SNAPSHOT
@@ -13,10 +13,23 @@ services:
       EUREKASERVER_PORT: "8761"
       ENCRYPT_KEY:       "IMSYMMETRIC"
 
+  organizationdb:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: "postgres_dev"
+      POSTGRES_PASSWORD: "postgr@s_dev"
+      POSTGRES_DB: "eagle_eye_dev"
+    volumes:
+      - ./init-organization.sql:/docker-entrypoint-initdb.d/1-init.sql
+      - ./data-organization.sql:/docker-entrypoint-initdb.d/2-data.sql
+#    expose:
+#      - "5433"
+    ports:
+      - "5433:5432"
+#    command: -p 5433
+
   database:
     image: postgres:latest
-    ports:
-      - "5432:5432"
     environment:
       POSTGRES_USER: "postgres_dev"
       POSTGRES_PASSWORD: "postgr@s_dev"
@@ -24,6 +37,8 @@ services:
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/1-init.sql
       - ./data.sql:/docker-entrypoint-initdb.d/2-data.sql
+    ports:
+      - "5432:5432"
 
   licensing_service:
     image: oselesley/tmx_licensing-service:0.0.1-SNAPSHOT
@@ -36,10 +51,11 @@ services:
       EUREKASERVER_URI: "http://eurekaserver:8761/eureka/"
       CONFIGSERVER_PORT: 8888
       EUREKASERVER_PORT:   "8761"
-      DATABASESERVER_PORT: 5432
+      DATABASESERVER_PORT: "5432"
       ENCRYPT_KEY: "IMSYMMETRIC"
     depends_on:
       - database
+
   organization_service:
     image: oselesley/tmx_organization-service:0.0.1-SNAPSHOT
     ports:
@@ -49,10 +65,26 @@ services:
       SERVER_PORT: "8085"
       CONFIGSERVER_URI: "http://configserver:8888"
       EUREKASERVER_URI: "http://eurekaserver:8761/eureka/"
+      EUREKASERVER_PORT:   8761
+      CONFIGSERVER_PORT:   "8888"
+      DATABASESERVER_PORT: "5432"
+#      DATABASESERVER_PORT: "5433"
+      ENCRYPT_KEY:      "IMSYMMETRIC"
+    depends_on:
+      - organizationdb
+
+  gatewayserver:
+    image: oselesley/tmx_gatewayserver:0.0.1-SNAPSHOT
+    ports:
+      - "8072:8072"
+    environment:
+      PROFILE: "dev"
+      SERVER_PORT: "8072"
+      CONFIGSERVER_URI: "http://configserver:8888"
+      EUREKASERVER_URI: "http://eurekaserver:8761/eureka/"
       EUREKASERVER_PORT:   "8761"
       CONFIGSERVER_PORT:   "8888"
       DATABASESERVER_PORT: "5432"
       ENCRYPT_KEY:      "IMSYMMETRIC"
     depends_on:
       - database
-
